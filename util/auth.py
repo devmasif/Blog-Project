@@ -13,6 +13,8 @@ bcrypt_context = CryptContext(schemes=["bcrypt"])
 
 SECRET_KEY = "abcdef@123@2@#$!#1233124214"
 ALGORITHM= "HS256"
+ACCESS_TOKEN_EXPIRE_MINUTES = 30
+
 
 def hash_password(password: str) -> str:
     return bcrypt_context.hash(password)
@@ -22,7 +24,7 @@ def verify_password(plain_pw : str, hash_pw: str) -> bool:
 
 def create_access_token(data: dict):
     to_encode = data.copy()
-    expire = datetime.utcnow() + timedelta(30)
+    expire = datetime.utcnow() + timedelta(ACCESS_TOKEN_EXPIRE_MINUTES)
     to_encode.update({"exp": expire})
     return jwt.encode(to_encode, SECRET_KEY, algorithm=ALGORITHM)
 
