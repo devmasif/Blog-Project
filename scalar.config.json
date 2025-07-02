@@ -1,4 +1,5 @@
 {
   "title": "FastAPI Blog API",
+  "subdomain": "fastapi-blog",
   "spec": "./openapi.json"
 }
