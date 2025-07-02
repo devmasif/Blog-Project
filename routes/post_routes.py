@@ -29,7 +29,7 @@ def list_published_posts(
 
     cursor = posts_collection.find(query).skip(skip).limit(limit)
 
-    posts = [convert_post(post) for post in cursor]
+    posts = [convert(post) for post in cursor]
 
     return posts
 
@@ -42,7 +42,7 @@ def getPost(slug: str):
     if not post:
         raise HTTPException(status_code=404, detail= "Post Not found")
     
-    return convert_post(post)
+    return convert(post)
 
 @router.post("/posts")
 def CreatePost(
@@ -61,7 +61,7 @@ def CreatePost(
 
     posts_collection.insert_one(post_data)
 
-    return convert_post(post_data)
+    return (post_data)
 
 
 @router.put("/posts/{slug}")
@@ -87,7 +87,7 @@ def EditPost(
     posts_collection.update_one({"slug": slug}, {"$set": updated_data})
 
     post = posts_collection.find_one({"slug": slug})
-    return convert_post(post)
+    return convert(post)
 
 
 @router.post("/posts/{slug}")
@@ -122,7 +122,7 @@ def get_my_posts(
    
     posts = []
     for post in cursor:
-        posts.append(convert_post(post))
+        posts.append(convert(post))
     
     return posts
    
