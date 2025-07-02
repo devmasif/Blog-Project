@@ -1,0 +1,4 @@
+{
+  "title": "FastAPI Blog API",
+  "spec": "./openapi.json"
+}
