@@ -62,11 +62,7 @@ def login_user(form_data: OAuth2PasswordRequestForm = Depends()):
     }
 
 
-
-
-
 @router.get("/me", response_model=User)
 def view_profile(current_user: User = Depends(get_current_user)):
     return current_user
-
 
